@@ -26,6 +26,7 @@
     <ul class="doc-links">
       <li><a href="https://github.com/ruddus11/lecture-rag" target="_blank" rel="noopener noreferrer">GitHub 저장소</a></li>
       <li><a href="https://github.com/ruddus11/lecture-rag/tree/main/docs/decisions" target="_blank" rel="noopener noreferrer">설계 결정 기록 (ADR)</a></li>
+      <li><a href="https://github.com/ruddus11/lecture-rag/actions" target="_blank" rel="noopener noreferrer">CI 실행 기록</a></li>
       <li><a href="https://github.com/ruddus11/lecture-rag/blob/main/docs/evaluation.md" target="_blank" rel="noopener noreferrer">평가 기록</a></li>
     </ul>
 
@@ -85,9 +86,9 @@
       <dl class="spec">
         <div><dt>백엔드</dt><dd>Python 3.12, FastAPI, SQLite 원장, 단일 작업 워커</dd></div>
         <div><dt>검색</dt><dd>Qdrant 1.20, OpenSearch 2.19 + Nori, 앱 계층 RRF</dd></div>
-        <div><dt>답변</dt><dd>OpenAI, Claude를 바꿔 끼우는 공통 인터페이스 (기본값은 키 없이 도는 fake)</dd></div>
+        <div><dt>답변</dt><dd>OpenAI, Claude를 바꿔 끼우는 공통 인터페이스 (기본값은 키 없이 실행하는 fake · 실제 API 호출 미검증)</dd></div>
         <div><dt>프론트엔드</dt><dd>React, TypeScript, Vite, React Query, react-pdf</dd></div>
-        <div><dt>운영</dt><dd>Docker Compose 4개 서비스, GitHub Actions CI, 비밀 스캔 훅</dd></div>
+        <div><dt>운영</dt><dd>Docker Compose 4개 서비스 구성 (실기동 미검증), GitHub Actions 기본 CI, 비밀 스캔 훅</dd></div>
       </dl>
     </section>
 
@@ -95,8 +96,8 @@
       <h2>역할</h2>
       <ul>
         <li>요구사항, 설계, 구현, 평가, 문서화 전체 (1인)</li>
-        <li>AI 코딩 에이전트와 함께 단계마다 완료 기준을 정하고, 기준을 통과해야 다음 단계로 넘어가는 방식으로 진행</li>
-        <li>선택의 이유를 ADR 11개로 기록 (RRF 위치, SQLite와 단일 워커, Nori 설정, 청킹, 임베딩, 인용과 보류, 캐시, 질문 임베딩 묶음 처리 등)</li>
+        <li>AI 코딩 도구를 활용해 구현하고, 요구사항·설계 선택·테스트 기준과 미검증 항목을 직접 관리</li>
+        <li>선택의 이유를 ADR로 기록 (RRF 위치, SQLite와 단일 워커, Nori 설정, 청킹, 임베딩, 인용과 보류, 캐시, 질문 임베딩 묶음 처리 등)</li>
       </ul>
     </section>
 
@@ -117,20 +118,6 @@
       </div>
       <p class="note">질문이 슬라이드 제목과 같은 표현이고 과목마다 문서가 하나뿐이라, 세 방식이 모두 만점에 가까워 구분이 되지 않았습니다. test 10문항은 마지막 확인용으로 아직 열지 않았습니다.</p>
 
-      <h3>어려운 문항으로 다시 비교 (2026-11-13, hard 49문항, 정답 있는 43문항 기준)</h3>
-      <p>같은 과목에 주제가 겹치는 문서를 하나씩 더 넣고, 용어 없이 풀어 쓴 질문, 약어와 수치, 두 문서에 비슷한 내용이 있는 질문, 두 문서가 모두 필요한 질문으로 문항을 새로 만들었습니다. 문항은 결과를 보기 전에 고정했습니다.</p>
-      <div class="table-wrap">
-        <table class="data">
-          <thead><tr><th>방식</th><th class="r">Hit@1</th><th class="r">Hit@3</th><th class="r">MRR@10</th><th class="r">헷갈리는 문항 Hit@1 (11개)</th></tr></thead>
-          <tbody>
-            <tr><td>키워드 (BM25)</td><td class="r">0.86</td><td class="r">0.98</td><td class="r">0.92</td><td class="r">0.82</td></tr>
-            <tr><td>의미 (벡터)</td><td class="r">0.81</td><td class="r">0.95</td><td class="r">0.89</td><td class="r">0.55</td></tr>
-            <tr><td>혼합 (RRF)</td><td class="r">0.86</td><td class="r">0.98</td><td class="r">0.92</td><td class="r">0.73</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <p>혼합이 키워드보다 낫다는 결과는 나오지 않았습니다. 의미 검색은 비슷한 내용의 페이지가 여럿일 때 옆 페이지를 먼저 올리는 경우가 많았고, 혼합은 그중 일부를 키워드 순위로 되살렸습니다. 자료에 없는 일상어로 물은 질문 2개는 세 방식이 모두 1위에서 놓쳤습니다. 직접 만든 4개 문서, 39개 청크의 작은 표본이라 일반적인 우열로 보지 않습니다.</p>
-
       <h3>검색 지연 개선 (2026-11-13, 혼합 검색, 캐시 off, 요청 200건)</h3>
       <div class="table-wrap">
         <table class="data">
@@ -145,7 +132,7 @@
       <p>구간별로 재 보니 지연의 93%가 질문 임베딩(CPU 41ms)이었습니다. 동시에 들어온 질문을 한 번에 묶어 임베딩하도록 바꿔 동시 5개에서 p50을 약 13%, 처리량을 약 18% 개선했습니다. 바꾸기 전과 후에 dev 30문항의 검색 순위가 30개 모두 같은 것도 확인했습니다.</p>
 
       <h3>테스트</h3>
-      <p>API 테스트 155개, 웹 테스트 16개 통과. 실제 Qdrant와 OpenSearch를 띄운 통합 테스트 5개 통과. CI에서 린트, 타입 검사, 비밀 스캔을 함께 돌립니다.</p>
+      <p>개발 기록 기준 API 테스트 155개, 웹 테스트 16개 통과. 실제 Qdrant와 OpenSearch를 띄운 통합 테스트 5개 통과. 이 수치는 기존 개발 검증 기록 기준이며, 실제 엔진 통합 테스트는 별도 로컬 실행 결과입니다. GitHub Actions 기본 CI 성공 기록을 확인했으며, Docker 전체 흐름과 실제 LLM 품질 검증은 남아 있습니다.</p>
     </section>
 
     <section class="doc-sec">
@@ -194,7 +181,7 @@
         <li>Docker Compose로 4개 서비스를 새로 띄워 전체 흐름을 확인하는 수용 검증은 아직 하지 않았습니다. 지금까지는 네이티브 실행으로 검증했습니다.</li>
         <li>OpenAI와 Claude 실제 호출은 API 키가 없어 확인하지 않았습니다. 화면의 답변은 동작 확인용입니다.</li>
         <li>텍스트 PDF만 지원합니다. 스캔본, 복잡한 표, 다단 레이아웃은 다루지 않습니다.</li>
-        <li>평가 자료와 문항을 모두 직접 만들었고 표본이 작습니다. 실제 수업 자료로 문항을 늘리고, 일상어 질문을 놓치는 문제에 재순위화(reranker)를 시험할 계획입니다.</li>
+        <li>평가 자료와 문항을 모두 직접 만들었고 표본이 작습니다. 실제 수업 자료로 검색 정확도와 답변 보류 품질을 추가 평가할 계획입니다.</li>
       </ul>
     </section>
   </main>
