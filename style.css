@@ -284,3 +284,27 @@ h3 { font-size: var(--font-size-lg); line-height: var(--text-heading-leading); f
 .phones .shot { margin: 0; }
 .phones .shot img { border-radius: var(--radius-element); }
 @media (max-width: 760px) { .phones { grid-template-columns: repeat(2, 1fr); } }
+
+/* Readable flow diagrams preserve text and direction on narrow screens. */
+.journey-diagram { margin: 0; }
+.journey-diagram ol { display: grid; grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr)); gap: var(--spacing-4); list-style: none; padding: 0; counter-reset: journey; }
+.journey-diagram li { position: relative; counter-increment: journey; margin: 0 !important; border: 1px solid var(--color-border); border-radius: var(--radius-element); padding: var(--spacing-4); }
+.journey-diagram li::before { content: counter(journey, decimal-leading-zero); display: block; font: var(--font-size-sm) var(--font-mono); color: var(--color-text-accent); margin-bottom: var(--spacing-2); }
+.journey-diagram strong, .journey-diagram span { display: block; }
+.journey-diagram span, .journey-diagram figcaption { font-size: var(--font-size-sm); color: var(--color-text-secondary); }
+.journey-diagram figcaption { margin-top: var(--spacing-3); }
+.architecture-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--spacing-3); margin-bottom: var(--spacing-4); }
+.architecture-zone { border: 1px solid var(--color-border); border-radius: var(--radius-element); padding: var(--spacing-4); background: var(--color-background-muted); }
+.architecture-zone h3 { margin: 0 0 var(--spacing-4); }
+.architecture-zone p { margin: 0; font-size: var(--font-size-sm); }
+.diagram-arrow { display: block; color: var(--color-text-accent); margin: var(--spacing-2) 0; }
+@media (max-width: 760px) {
+  .journey-diagram ol, .architecture-grid { grid-template-columns: 1fr; }
+  .flow-row { grid-template-columns: 1fr; }
+  .flow ol { display: grid; gap: var(--spacing-5); }
+  .flow li + li::before { content: "↓"; left: 50%; top: -1.15rem; transform: translateX(-50%); }
+}
+@media print { .journey-diagram li, .architecture-zone { break-inside: avoid; } }
+
+.journey-diagram li:not(:last-child)::after { content: "→"; position: absolute; right: calc(-1 * var(--spacing-3)); top: 50%; transform: translate(50%, -50%); color: var(--color-text-accent); }
+@media (max-width: 760px) { .journey-diagram li:not(:last-child)::after { content: "↓"; right: auto; left: 50%; top: auto; bottom: calc(-1 * var(--spacing-4)); transform: translateX(-50%); } }

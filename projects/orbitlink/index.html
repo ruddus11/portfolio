@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>OrbitLink | 추경연</title><meta name="description" content="운영체제 팀 과제에서 담당한 우선순위 큐와 메시지 전달 흐름."><meta name="color-scheme" content="light dark"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"><link rel="stylesheet" href="../../style.css"></head>
+<body class="detail">
+  <a class="skip" href="#main">본문 바로가기</a>
+  <header class="site-header"><div class="wrap bar"><a class="brand" href="../../">추경연</a><a class="back" href="../../#project-orbitlink">프로젝트 목록</a></div></header>
+  <main id="main" class="wrap doc">
+    <p class="doc-kicker">2026년 2학기 · 운영체제 팀 프로젝트</p>
+    <h1>OrbitLink</h1>
+    <p class="lead">FreeRTOS 기반 우주선 통신 시스템을 다루는 운영체제 팀 과제에 참여했습니다. Queue &amp; Priority와 Message Queue 구간을 담당했고, 우선순위 큐 구현과 메시지 전달의 재시도·백오프 통합을 진행했습니다.</p>
+    <section class="doc-sec"><h2>담당한 문제</h2><p>메시지를 우선순위에 따라 대기시키고, 전달에 실패한 경우 다시 시도하는 흐름을 다뤘습니다. 운영체제의 큐 개념을 메시지 전달 처리와 연결하는 역할을 맡았습니다.</p></section>
+    <section class="doc-sec">
+      <h2>담당 구간의 흐름</h2>
+      <figure class="journey-diagram">
+        <ol>
+          <li><strong>메시지 대기</strong><span>우선순위에 따라 큐에서 관리</span></li>
+          <li><strong>전달</strong><span>Message Queue와 연동</span></li>
+          <li><strong>실패 처리</strong><span>재시도와 백오프를 적용</span></li>
+        </ol>
+        <figcaption>기존 포트폴리오에 기재한 담당 범위를 바탕으로 정리한 개념 흐름입니다.</figcaption>
+      </figure>
+    </section>
+
+
+    <section class="doc-sec"><h2>역할과 공개 범위</h2><ul><li>Queue &amp; Priority, Message Queue 개발 구간을 담당했습니다.</li><li>팀 프로젝트 전체를 개인 구현 성과로 표시하지 않았습니다.</li><li>현재 공개 자료만으로 팀 전체의 최종 실행 결과를 확인할 수 없어 처리량·지연·성공률 수치는 제시하지 않았습니다.</li></ul></section>
+  </main><footer class="site-footer"><div class="wrap"><p><a class="back" href="../../#project-orbitlink">프로젝트 목록으로</a></p></div></footer>
+</body></html>

@@ -32,7 +32,7 @@
     <section class="hero" id="top">
       <div class="wrap">
         <h1>추경연</h1>
-        <p class="lead">백엔드 API와 검색 파이프라인을 구현하고, 테스트와 측정으로 확인합니다. 여행 일정·정산 앱 Escale과 강의자료 RAG 검색 서비스를 개인 프로젝트로 개발하고 있습니다. 우송대학교 AI·빅데이터학과에 재학 중이며 백엔드·AI 서비스 개발 직무를 희망합니다.</p>
+        <p class="lead">백엔드 API와 검색 파이프라인을 구현하고, 테스트와 측정으로 확인했습니다. 여행 일정·정산 앱 Escale과 강의자료 RAG 검색 서비스를 개인 프로젝트로 개발하고 있습니다. 우송대학교 AI·빅데이터학과에 재학 중이며 백엔드·AI 서비스 개발 직무를 희망합니다.</p>
         <p class="hero-meta">관심 분야 <span>백엔드 API · 앱 서버 · RAG · 검색</span></p>
       </div>
     </section>
@@ -153,8 +153,12 @@
                   <dd>서버 인용 검증과 fake 생성기를 통한 흐름·회귀 테스트</dd>
                 </div>
                 <div class="skill-item">
-                  <dt>OpenAI · Claude API <span class="lv lv-proj">프로젝트 적용</span></dt>
-                  <dd>호출 어댑터 구현 · 실제 유료 API 호출과 답변 품질은 미검증</dd>
+                  <dt>OpenAI Responses API <span class="lv lv-use">사용 경험</span></dt>
+                  <dd>실제 구조화 답변·인용·보류 확인 · 광범위한 품질 평가는 별도</dd>
+                </div>
+                <div class="skill-item">
+                  <dt>Claude API <span class="lv lv-proj">프로젝트 적용</span></dt>
+                  <dd>호출 어댑터 구현 · Anthropic 실제 호출 미검증</dd>
                 </div>
               </dl>
             </section>
@@ -201,11 +205,11 @@
                 </div>
                 <div class="skill-item">
                   <dt>GitHub Actions <span class="lv lv-use">사용 경험</span></dt>
-                  <dd>강의자료 RAG 기본 CI 성공 기록 확인 · 통합 검증 job은 별도</dd>
+                  <dd>강의자료 RAG 기본 검사와 Linux Compose·브라우저 통합 검증</dd>
                 </div>
                 <div class="skill-item">
-                  <dt>Docker Compose <span class="lv lv-proj">프로젝트 적용</span></dt>
-                  <dd>4개 서비스 구성과 설정 검사 · 컨테이너 전체 흐름 검증 전</dd>
+                  <dt>Docker Compose <span class="lv lv-use">사용 경험</span></dt>
+                  <dd>RAG 4개 서비스 기동·실제 엔진·PDF 전체 흐름 확인</dd>
                 </div>
               </dl>
             </section>
@@ -234,7 +238,7 @@
               <span class="status">진행 중</span>
             </header>
             <p class="meta">2026.07 ~ · 개인 프로젝트 · 기획, 설계, 구현 (AI 코딩 도구 활용)</p>
-            <p>여행 전 일정과 예약, 여행 중 다음 일정과 남은 예산, 여러 통화로 쓴 경비의 동행자 정산, 다녀온 나라 기록을 한 흐름으로 묶은 모바일 앱입니다. 로그인 없이 기기 저장소만으로 동작합니다.</p>
+            <p>일정·예약·경비를 여러 앱에서 따로 확인하는 불편을 줄이기 위해 개발했습니다. 여행 준비 기록을 다음 일정 확인과 동행자 정산으로 연결했고, 핵심 흐름은 로그인 없이 기기 저장소에서 동작하도록 구현했습니다.</p>
             <ul>
               <li>금액과 환율을 정수 기반으로 계산하고 반올림 잔액을 배분해, 분담 합계가 원금과 일치하도록 처리</li>
               <li>여행지 시간대 기준 일정 저장, 서머타임 경계 처리</li>
@@ -251,13 +255,13 @@
               <span class="status">진행 중</span>
             </header>
             <p class="meta">2026.11 ~ · 개인 프로젝트 · 설계, 구현, 평가 전체</p>
-            <p>강의 PDF에 질문하면 답과 함께 근거가 된 원문 페이지를 보여 주고, 근거가 부족하면 답하지 않는 검색 서비스입니다. 기관과 역할에 따라 볼 수 있는 자료를 서버에서 나눕니다.</p>
+            <p>시험 준비 중 강의자료와 답변의 근거를 반복해서 찾는 문제를 다뤘습니다. 허용된 자료 검색→GPT 답변·인용 검증→원문 PDF 확인을 구현했고, 근거가 부족하면 답변을 보류하도록 구성했습니다.</p>
             <ul>
               <li>OpenSearch BM25(Nori)와 Qdrant 벡터 검색을 RRF로 결합하고, 자작 dev 30문항에서 세 방식을 비교 · 평가 데이터와 결과 CSV 공개</li>
               <li>인용을 서버에서 다시 검증하고, 근거가 부족하면 답변 보류</li>
               <li>기관 A와 B 사이에 문서, 파일, 검색, 인용이 섞이지 않는지 회귀 테스트로 확인</li>
               <li>질문 임베딩 묶음 처리로 동시 5개 요청에서 p50 <span class="num">136→118ms</span>, 처리량 약 <span class="num">18%</span> 개선</li>
-              <li>API·웹 회귀 테스트와 실제 엔진 통합 테스트 검증, 설계 선택을 ADR로 기록 · Docker 전체 흐름은 검증 전</li>
+              <li>API 회귀 156개·웹 16개·실제 엔진 통합 5개 검증, Docker·Linux 브라우저 CI 통과</li>
             </ul>
             <p class="tags">Python · FastAPI · Qdrant · OpenSearch · SQLite · React · TypeScript · Docker Compose · GitHub Actions</p>
             <p class="links"><a href="projects/lecture-rag/">상세 보기</a> · <a href="https://github.com/ruddus11/lecture-rag" target="_blank" rel="noopener noreferrer">GitHub</a></p>
@@ -269,7 +273,7 @@
               <span class="status">2026.03</span>
             </header>
             <p class="meta">개인 프로젝트 · 수집부터 배포까지 전체</p>
-            <p>백화점 공지, 잡지, 블로그에 흩어진 팝업스토어 정보를 모아 정제하고, 좌표와 함께 PostGIS에 넣어 지도로 보여 주는 프로젝트입니다.</p>
+            <p>팝업스토어의 위치·운영 기간을 여러 출처에서 따로 찾는 불편을 줄이기 위해 개발했습니다. 수집·정제·PostGIS 적재부터 지도 조회까지 연결했습니다.</p>
             <ul>
               <li>출처별 어댑터 3개와 공통 정제 파이프라인. 버린 데이터는 이유와 함께 거부 목록에 저장</li>
               <li>카카오 지오코딩, 중복 키로 한 번만 적재, GiST 공간 인덱스</li>
@@ -285,22 +289,23 @@
               <span class="status">진행 중</span>
             </header>
             <p class="meta">2026.10 ~ · 산학협력 팀 프로젝트 · 맡은 파트: IPS 센서 원리</p>
-            <p>로봇 암 관절에 사용하는 회전각 센서 모듈과 지그를 개발하는 산학과제입니다. 저는 IPS 센서의 동작 원리와 특징을 맡았습니다.</p>
+            <p>로봇 암 관절용 회전각 센서 모듈·지그 개발을 목표로 한 산학과제에 참여했습니다. IPS 센서의 동작 원리와 특징 정리를 맡았으며, 과제는 진행 중입니다.</p>
             <p class="links"><a href="projects/mobidigm/">상세 보기</a></p>
           </article>
 
           <article class="project" id="project-orbitlink">
             <header>
-              <h3>OrbitLink</h3>
+              <h3><a href="projects/orbitlink/">OrbitLink</a></h3>
               <span class="status">2026 2학기</span>
             </header>
             <p class="meta">운영체제 팀 프로젝트 · Queue &amp; Priority, Message Queue 개발</p>
-            <p>FreeRTOS로 만든 우주선 통신 시스템입니다.</p>
+            <p>운영체제 팀 과제에서 FreeRTOS 기반 통신 시스템의 우선순위 큐와 메시지 전달 구간을 담당했습니다.</p>
             <ul>
               <li>우선순위 큐 구현</li>
               <li>메시지 큐 연동 부분에 재시도(retry)와 백오프(backoff) 통합</li>
             </ul>
             <p class="tags">FreeRTOS · Priority Queue · Message Queue · Retry / Backoff</p>
+            <p class="links"><a href="projects/orbitlink/">담당 범위와 흐름 보기</a></p>
           </article>
         </div>
       </div>
