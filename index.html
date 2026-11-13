@@ -148,7 +148,7 @@
             <p class="meta">2026.11 ~ · 개인 프로젝트 · 설계, 구현, 평가 전체</p>
             <p>강의 PDF에 질문하면 답과 함께 근거가 된 원문 페이지를 보여 주고, 근거가 부족하면 답하지 않는 검색 서비스입니다. 기관과 역할에 따라 볼 수 있는 자료를 서버에서 나눕니다.</p>
             <ul>
-              <li>OpenSearch BM25(Nori)와 Qdrant 벡터 검색을 앱 계층 RRF로 합쳐 세 방식을 같은 데이터로 비교</li>
+              <li>OpenSearch BM25(Nori)와 Qdrant 벡터 검색을 앱 계층 RRF로 합쳐 세 방식을 같은 데이터로 비교. 헷갈리는 문서를 섞은 어려운 문항 43개에서 Hit@1 키워드 <span class="num">0.86</span>, 의미 <span class="num">0.81</span>, 혼합 <span class="num">0.86</span></li>
               <li>인용을 서버에서 다시 검증하고, 근거가 부족하면 답변 보류</li>
               <li>기관 A와 B 사이에 문서, 파일, 검색, 인용이 섞이지 않는지 회귀 테스트로 확인</li>
               <li>질문 임베딩 묶음 처리로 동시 5개 요청에서 p50 <span class="num">136→118ms</span>, 처리량 약 <span class="num">18%</span> 개선</li>
